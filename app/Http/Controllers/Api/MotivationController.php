@@ -25,9 +25,9 @@ class MotivationController extends Controller
         ]);
     }
 
-    public function getByUserId(Request $request)
+    public function getByUserId()
     {
-        $user = User::find($request->id);
+        $user = User::find(Auth::user()->id);
 
         $motivation = Motivation::where('user_id', $user->id)->get();
 

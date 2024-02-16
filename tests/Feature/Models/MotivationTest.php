@@ -31,18 +31,14 @@ class MotivationTest extends TestCase
 
     public function testMotivationByUserId()
     {
-        Sanctum::actingAs(User::factory()->create());
-
-        $user = User::factory()->createOne();
+        $user = Sanctum::actingAs(User::factory()->create());
 
         Motivation::factory()
-        ->for(
-            $user
-        )
+        ->for($user)
         ->count(3)
         ->create();
 
-        $this->json('GET', "/api/motivation/get-by-user-id?id={$user->id}")
+        $this->json('GET', "/api/motivation/get-by-user-id")
         ->assertOk();
     }
 }
